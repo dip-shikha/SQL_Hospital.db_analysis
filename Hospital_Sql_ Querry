@@ -29,3 +29,72 @@ Q.5 Update the patients table for the allergies column. If the patient's allergi
 UPDATE patients 
 SET allergies ='NKA'
 WHERE allergies IS NULL;
+
+Q.6 Show first name, last name, and the full province name of each patient.
+Example: 'Ontario' instead of 'ON'
+
+SELECT first_name, last_name, province_name
+FROM patients
+JOIN province_names ON province_names.province_id = patients.province_id;
+
+Q.7 Show how many patients have a birth_date with 2010 as the birth year.
+
+SELECT count(*)
+FROM patients
+WHERE year( birth_date) = 2010;
+
+Q.8 Show first name and last name of patients who does not have allergies. (null)
+
+SELECT first_name, last_name 
+FROM patients
+WHERE allergies Is null;
+
+Q.9 Show the first_name, last_name, and height of the patient with the greatest height.
+
+SELECT first_name, last_name , Max(height) as height
+FROM patients;
+
+Q.10 Show all columns for patients who have one of the following patient_ids:
+      1,45,534,879,1000
+      
+SELECT * FROM patients
+where patient_id In (1,45,534,879,1000);   
+
+Q.11 Show the total number of admissions
+
+SELECT count(*) as Total_no_admission
+FROM admissions;
+
+Q.12 Show all the columns from admissions where the patient was admitted and discharged on the same day.
+
+SELECT * 
+FROM admissions
+where admission_date = discharge_date;
+
+Q.13 Show the patient id and the total number of admissions for patient_id 579.
+
+SELECT patient_id, count(patient_id) as total_admission 
+FROM admissions
+where patient_id = 579
+
+Q.14 Based on the cities that our patients live in, show unique cities that are in province_id 'NS'?
+
+SELECT distinct city from patients
+where province_id = 'NS';
+
+Q.15 Write a query to find the first_name, last name and birth date of patients who has height greater than 
+160 and weight greater than 70
+
+SELECT first_name, last_name, birth_date from patients
+where height > 160 
+and weight > 70;
+
+Q.16 Write a query to find list of patients first_name, last_name, and allergies from Hamilton where allergies are not null
+
+SELECT first_name, last_name, allergies from patients
+where city = 'Hamilton'
+and allergies is not null;
+
+Q.17 Based on cities where our patient lives in, write a query to display the list of unique city starting with 
+  a vowel (a, e, i, o, u). Show the result order in ascending by city.
+  
